@@ -1,5 +1,8 @@
 # helpful sql
 
+-- find the creation schema for any table/view (MUST BE RUN IN TERMINAL, NOT PSQL)
+pg_dump -d $PUPPY_DATABASE_URL -t 'wells' --schema-only
+
 -- find currently running processes
 SELECT * FROM pg_stat_activity WHERE state = 'active';
 
@@ -15,7 +18,7 @@ set max_parallel_workers_per_gather = 0 ;
 -- how to see table size
 SELECT pg_relation_size('TABLE_NAME');
 
--- table size in a readable format
+-- table_ size in a readable format
 SELECT pg_size_pretty(pg_relation_size('TABLE_NAME'));
 
 --WHERE to find the relation pages
