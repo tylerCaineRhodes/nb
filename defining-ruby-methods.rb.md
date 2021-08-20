@@ -26,6 +26,12 @@ end
 
 Example.a_new_class_method # => a new class method
 
+def Example.a_class_method_with_style
+  'yo, whaddup'
+end
+
+
+
 class Example
   def self.a_newer_class_method
     'an even newer class method'
@@ -33,6 +39,14 @@ class Example
 end
 
 Example.a_newer_class_method # => an even newer class method
+
+class Example
+  class << self
+    def an_even_greater_class_method
+      'the greatest!'
+    end
+  end
+end
 
 Example.instance_eval do
   def goodbye
