@@ -3,6 +3,9 @@
 -- find the creation schema for any table/view (MUST BE RUN IN TERMINAL, NOT PSQL)
 pg_dump -d $PUPPY_DATABASE_URL -t 'wells' --schema-only
 
+-- find the creation schema for a function that doesn't have arguments (MUST BE IN PSQL)
+SELECT pg_get_functiondef('newest_hire()'::regprocedure);
+
 -- find currently running processes
 SELECT * FROM pg_stat_activity WHERE state = 'active';
 
