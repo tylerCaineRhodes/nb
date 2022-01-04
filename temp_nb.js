@@ -1,0 +1,2 @@
+# js inspect methods
+
