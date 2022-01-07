@@ -1,3 +1,4 @@
+
 # js inspect methods
 
 // To see all existing methods
