@@ -12,3 +12,4 @@ jsInspectMethods.js
 searching_in_elastic.js
 analyzing_mapping_and_indexing_in_elastic.js
 active_model_modules.rb
+Gemfile.local
