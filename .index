@@ -14,3 +14,4 @@ analyzing_mapping_and_indexing_in_elastic.txt
 active_model_modules.rb
 Gemfile.local
 oldspark.py
+sql
