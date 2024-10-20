@@ -1,1 +1,12 @@
-/Users/tylerrhodes/Gemfile.local
+group :development, :test do
+  gem 'fancy-p'
+  gem 'interactive_editor'
+
+  # good rubocop extensions
+  gem 'rubocop-rails'
+  gem 'rubocop-performance'
+  gem 'rubocop-rspec'
+  gem 'rubocop-rspec_rails'
+  gem 'rubocop-capybara'
+  gem 'rubocop-factory_bot'
+end
