@@ -15,5 +15,11 @@ class BetterProgressFormatter < RSpec::Core::Formatters::ProgressFormatter
   def example_passed(_notification)
     output.print wrap('F', RSpec.configuration.failure_color)
   end
-end
 
+  def dump_summary(summary)
+    output.puts
+    total_example_count = summary.example_count
+    success_count = total_example_count - summary.failure_count
+    output.puts "#{total_example_count} examples, #{success_count} failures, #{summary.pending_count} pending"
+  end
+end
