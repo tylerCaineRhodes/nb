@@ -2,3 +2,4 @@ Gemfile.local
 active_model_modules.rb
 defining_ruby_methods.rb
 reverse_rspec_formatter.rb
+rubocop.yml

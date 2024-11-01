@@ -1,0 +1,11 @@
+AllCops:
+  NewCops: enable
+
+require:
+  - rubocop-rails
+  - rubocop-performance
+  - rubocop-rspec
+  - rubocop-rspec_rails
+  - rubocop-capybara
+  - rubocop-factory_bot
+
