@@ -1,0 +1,1 @@
+pg_restore -d central-prod --disable-triggers --no-owner --no-acl --clean --if-exists -v  ~/projects/central-dump

@@ -6,3 +6,4 @@ search_func.sql
 helpful_sql.sql
 create-role.md
 snowflakeelt.sql
+restore_local_db
