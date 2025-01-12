@@ -1,0 +1,87 @@
+{
+  "app/controllers/*_controller.rb": {
+    "alternate": "spec/requests/{}_spec.rb",
+    "type": "controller"
+  },
+  "spec/requests/*_spec.rb": {
+    "alternate": "app/controllers/{}_controller.rb",
+    "type": "request"
+  },
+  "app/models/*.rb": {
+    "alternate": "spec/models/{}_spec.rb",
+    "type": "model"
+  },
+  "spec/models/*_spec.rb": {
+    "alternate": "app/models/{}.rb",
+    "type": "model"
+  },
+  "app/views/**/*.html.erb": {
+    "alternate": "spec/views/{}_spec.rb",
+    "type": "view"
+  },
+  "spec/views/*_spec.rb": {
+    "alternate": "app/views/{}_spec.rb",
+    "type": "view"
+  },
+  "app/helpers/*.rb": {
+    "alternate": "spec/helpers/{}_spec.rb",
+    "type": "helper"
+  },
+  "spec/helpers/*_spec.rb": {
+    "alternate": "app/helpers/{}.rb",
+    "type": "helper"
+  },
+  "app/mailers/*.rb": {
+    "alternate": "spec/mailers/{}_spec.rb",
+    "type": "mailer"
+  },
+  "spec/mailers/*_spec.rb": {
+    "alternate": "app/mailers/{}.rb",
+    "type": "mailer"
+  },
+  "app/jobs/*.rb": {
+    "alternate": "spec/jobs/{}_spec.rb",
+    "type": "job"
+  },
+  "spec/jobs/*_spec.rb": {
+    "alternate": "app/jobs/{}.rb",
+    "type": "job"
+  },
+  "app/services/*.rb": {
+    "alternate": "spec/services/{}_spec.rb",
+    "type": "service"
+  },
+  "spec/services/*_spec.rb": {
+    "alternate": "app/services/{}.rb",
+    "type": "service"
+  },
+  "app/models/concerns/*.rb": {
+    "alternate": "spec/models/concerns/{}_spec.rb",
+    "type": "concern"
+  },
+  "spec/models/concerns/*_spec.rb": {
+    "alternate": "app/models/concerns/{}.rb",
+    "type": "concern"
+  },
+  "spec/support/*.rb": {
+    "alternate": "app/helpers/{}.rb",
+    "type": "support"
+  },
+  "config/environments/*.rb": {
+    "alternate": "spec/config/environments/{}_spec.rb",
+    "type": "config"
+  },
+  "spec/config/environments/*_spec.rb": {
+    "alternate": "config/environments/{}.rb",
+    "type": "config"
+  },
+  "app/models/user.rb": {
+    "alternate": "spec/models/_user/user_spec.rb",
+    "type": "model"
+  },
+  "spec/models/_user/user_spec.rb": {
+    "alternate": "app/models/user.rb",
+    "type": "model"
+  }
+}
+
