@@ -1,0 +1,4 @@
+web: rdbg -n -O --port 12345 -- bin/rails server -p 3000
+css: bin/rails tailwindcss:watch
+worker: bundle exec sidekiq
+redis: redis-server --port 6379
