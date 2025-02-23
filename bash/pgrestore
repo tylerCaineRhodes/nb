@@ -1,0 +1,60 @@
+#! /opt/homebrew/bin/bash
+
+readonly LOCAL_URL=$1
+readonly DUMPDIR=$2
+
+if [ -z "$LOCAL_URL" ]; then
+  echo "Error: LOCAL_URL is required."
+  exit 1
+elif [ -z "$DUMPDIR" ]; then
+  echo "Error: DUMPDIR is required."
+  exit 1
+fi
+
+function restore_gracefully() {
+  echo "Starting restore with $DUMPDIR..."
+
+  pg_restore -d $LOCAL_URL -j 4 --disable-triggers --no-owner --no-acl --clean --if-exists -v $DUMPDIR
+
+  if [ $? -ne 0 ]; then
+    echo "Error: pg_restore failed."
+    return 1
+  else
+    echo "Restore completed successfully!"
+  fi
+}
+
+######## Main ##########
+restore_gracefully $LOCAL_URL $DUMPDIR
+
+if [ $? -ne 0 ]; then
+  exit 1
+fi
+
+echo "Restoring triggers and constraints..."
+
+# For re-enabling triggers
+psql "$LOCAL_URL" -c '
+DO $$
+DECLARE
+    table_name text;
+BEGIN
+    FOR table_name IN (SELECT tablename FROM pg_tables WHERE schemaname='\''public'\'')
+    LOOP
+        EXECUTE '\''ALTER TABLE public.'\'' || table_name || '\'' ENABLE TRIGGER ALL;'\'';
+    END LOOP;
+END $$;
+'
+# For re-enabling foreign key constraints
+psql "$LOCAL_URL" -c '
+DO $$
+DECLARE
+    constraint_record record;
+BEGIN
+    FOR constraint_record IN (SELECT conname, conrelid::regclass::text as table_name FROM pg_constraint WHERE contype = '\''f'\'' AND connamespace = (SELECT oid FROM pg_namespace WHERE nspname = '\''public'\''))
+    LOOP
+        EXECUTE '\''ALTER TABLE '\'' || constraint_record.table_name || '\'' VALIDATE CONSTRAINT '\'' || constraint_record.conname || '\'';'\'';
+    END LOOP;
+END $$;
+'
+######## Main ##########
