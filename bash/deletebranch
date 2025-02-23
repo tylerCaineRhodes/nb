@@ -1,0 +1,8 @@
+#! /opt/homebrew/bin/bash
+
+copybranch
+
+git switch main
+
+pbpaste | xargs git branch -d
+
