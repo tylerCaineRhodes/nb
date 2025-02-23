@@ -5,3 +5,4 @@ reverse_rspec_formatter.rb
 rubocop.yml
 sidekiq_batch_reference.rb
 args.rb
+anon.rb
