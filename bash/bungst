@@ -1,0 +1,36 @@
+#! /opt/homebrew/bin/bash
+
+PROJECT_DIR=$(pwd)
+
+if [ ! -f $HOME/Gemfile.local ]; then
+  echo 'You must have a `Gemfile.local` in your home directory.'
+  exit 1
+fi
+
+GLOBAL_GEMFILE_LOCAL=$HOME/Gemfile.local
+
+echo 'Adding Gemfile.local'
+touch "$PROJECT_DIR/Gemfile.local"
+
+TEMP_GEMFILE=$PROJECT_DIR/Gemfile.local
+
+echo 'Adding Gemfile.local.lock'
+cp "$PROJECT_DIR/Gemfile.lock" "$PROJECT_DIR/Gemfile.local.lock"
+
+echo "eval_gemfile '$PROJECT_DIR/Gemfile'" > $TEMP_GEMFILE
+cat $GLOBAL_GEMFILE_LOCAL >> $TEMP_GEMFILE
+
+BUNDLE_GEMFILE=$TEMP_GEMFILE bundle install
+
+if [ $# -eq 0 ]; then
+  BUNDLE_GEMFILE=$TEMP_GEMFILE bundle exec bin/dev
+else
+  BUNDLE_GEMFILE=$TEMP_GEMFILE bundle exec "$@"
+fi
+
+echo 'Removing Gemfile.local'
+rm $TEMP_GEMFILE
+
+echo 'Removing Gemfile.local.lock'
+rm "$PROJECT_DIR/Gemfile.local.lock"
+
