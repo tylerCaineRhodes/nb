@@ -1,0 +1,43 @@
+[alias]
+  co = checkout
+  ci = commit
+  st = status
+  br = branch
+  lg = log --oneline --left-right --graph --abbrev-commit
+  hist = log --pretty=format:'%h %ad | %s%d [%an]' --left-right --graph --date=short 
+  lum = lg origin/main...head
+  lim = lg origin/main..head
+  lup = lg @{u}...head
+  mup = merge @{u}
+  rum = rebase origin/main
+  oldlum = lg origin/master...head
+  oldrum = rebase origin/master
+  type = cat-file -t
+  dump = cat-file -p
+  lall = log --branches --tags --remotes --graph
+[user]
+  name = Tyler Rhodes
+  email = rhodetyl000@gmail.com
+[core]
+  autocrlf = input
+  pager = less -FXRS -x2
+  whitespace = space-before-tab indent-with-non-tab tab-in-indent trailing-space
+  hooksPath = /Users/tylerrhodes/.githooks
+[format]
+  ; pretty = format:"%C(yellow)%<(12)%cd%Creset %<(50)%s | %C(auto)%h%Creset%C(auto)%d%Creset | %Cgreen%an%Creset"  
+  pretty = format:"%C(yellow)%<(9)%cd%Creset %C(green)%<(10)%cr%Creset %<(50)%s | %C(auto)%h%Creset%C(auto)%d%Creset | %Cgreen%an%Creset"
+[log]
+  date = short
+[push]
+  default = tracking
+[rebase]
+  autosquash = true
+[init]
+  defaultBranch = main
+[commit]
+  template = /Users/tylerrhodes/.gitmessage
+[merge]
+  ff = only
+[pull]
+  ff = only
+
