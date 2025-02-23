@@ -1,0 +1,71 @@
+#! /opt/homebrew/bin/bash
+
+function cleanup_temp_file() {
+  local temp_file=$1
+  rm -f "$temp_file"
+}
+
+function reset_database() {
+  local db_name=$1
+
+  dropdb --if-exists "$db_name"
+  createdb "$db_name"
+  psql -d "$db_name" -c "DROP SCHEMA public CASCADE; CREATE SCHEMA public;"
+}
+
+function anonymize_database() {
+  local url=$1
+  local output_file=$2
+
+  echo "Starting anonymization using pg-anonymizer..."
+
+  npx pg-anonymizer "$url" -o "$output_file" \
+    --columns "first_name:faker.name.firstName,last_name:faker.name.lastName,email:faker.internet.email,username:faker.internet.userName"
+
+  if [ $? -ne 0 ]; then
+    cleanup_temp_file "$output_file"
+    echo "Error: Anonymization failed."
+    exit 1
+  fi
+}
+
+function restore_database() {
+  local db_name=$1
+  local dump_file=$2
+
+  echo "Restoring anonymized data..."
+
+  psql -d "$db_name" -f "$dump_file"
+
+  if [ $? -ne 0 ]; then
+    cleanup_temp_file "$dump_file"
+    echo "Error: Failed to restore anonymized data."
+    exit 1
+  fi
+}
+
+######## Main ##########
+readonly LOCAL_URL=$1
+readonly DUMPDIR=$2
+readonly TEMP_DUMP="${DUMPDIR}/anonymized.sql"
+
+if [ -z "$LOCAL_URL" ]; then
+  echo "Error: LOCAL_URL is required."
+  exit 1
+fi
+
+if [ -z "$DUMPDIR" ]; then
+  echo "Error: DUMPDIR is required."
+  exit 1
+fi
+
+DB_NAME=$(echo "$LOCAL_URL" | sed -n 's/.*\/\([^?]*\).*/\1/p')
+
+anonymize_database "$LOCAL_URL" "$TEMP_DUMP"
+reset_database "$DB_NAME"
+restore_database "$DB_NAME" "$TEMP_DUMP"
+cleanup_temp_file "$TEMP_DUMP"
+
+echo "Anonymization completed successfully!"
+######## Main ##########
+
