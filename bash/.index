@@ -5,3 +5,4 @@ pgrestore
 pganonymize
 changedfiles
 currentbranch
+copybranch
