@@ -1,0 +1,6 @@
+#! /opt/homebrew/bin/bash
+
+branch=${1:-HEAD}
+
+# git branch --show-current
+git rev-parse --abbrev-ref $branch
