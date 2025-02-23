@@ -1,0 +1,44 @@
+#! /opt/homebrew/bin/bash
+
+function dump_gracefully() {
+  local DATABASE_TO_COPY_URL=$1
+  local DUMPDIR=$2
+
+  if [ -z "$DATABASE_TO_COPY_URL" ]; then
+    echo "Error: DATABASE_TO_COPY_URL is required."
+    return 1
+  elif [ -z "$DUMPDIR" ]; then
+    echo "Error: DUMPDIR is required."
+    return 1
+  fi
+
+  args=("$@")
+  local IGNORED_TABLES=${args[@]:2}
+
+  mkdir -p "$DUMPDIR"
+  echo "Starting dump with '$DUMPDIR'..."
+
+  local ignored_table_str=""
+  for table in $IGNORED_TABLES; do
+    ignored_table_str+=" -T \"$table\""
+  done
+
+  workers=4
+
+  pg_dump $DATABASE_TO_COPY_URL -j $workers -Fd -v -b $ignored_table_str --no-acl --no-owner -f $DUMPDIR
+
+  if [ $? -ne 0 ]; then
+    echo "Error: pg_dump failed."
+    return 1
+  else
+    echo "Dump completed successfully!"
+  fi
+}
+
+######## Main ##########
+dump_gracefully $@
+
+if [ $? -ne 0 ]; then
+  exit 1
+fi
+######## Main ##########
