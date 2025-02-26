@@ -7,3 +7,4 @@ helpful_sql.sql
 create-role.md
 snowflakeelt.sql
 restore_local_db
+psql_settings.sql
