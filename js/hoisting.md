@@ -1,5 +1,5 @@
 
-isting in JavaScript: A Practical Guide
+Hoisting in JavaScript: A Practical Guide
 
 ## Introduction
 
