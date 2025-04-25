@@ -7,4 +7,8 @@ pg_restore -d "postgresql://localhost:5432/central_development" --disable-trigge
 
 
 mkdir ~/smc-stage-dump && pg_dump <REMOTE_URL> -Fd -v -b  --no-acl --no-owner -f ~/smc-stage-dump
+
 pg_restore -d  "postgresql://localhost:5432/central_development" --disable-triggers --no-owner --no-acl --clean --if-exists -v ~/smc-stage-dump
+
+-- to a local
+pg_restore -d central-prod --disable-triggers --no-owner --no-acl --clean --if-exists -v  ~/projects/central-dump
