@@ -12,3 +12,8 @@ sudo -u postgres psql
 ALTER
 ROLE postgres WITH PASSWORD 'postgres'
 ```
+
+# If role postgres does not exist, go into one of the initial tables
+```bash
+ psql -U $(whoami) -d postgres
+```
