@@ -1,0 +1,5 @@
+# Encrypt
+tar -cvf - .file_or_folder | openssl aes-256-cbc -pbkdf2 -e -out file_or_folder.enc
+
+# Decrypt
+openssl aes-256-cbc -pbkdf2 -d -in file_or_folder.enc | tar -xvf -
