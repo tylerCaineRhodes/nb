@@ -3,6 +3,7 @@
  | ✅    | `U+2705`            | White heavy check mark (success)       | 
  | ⚠️     | `U+26A0 U+FE0F`     | Warning sign                           | 
  | ❌    | `U+274C`            | Cross mark (error)                     | 
+ | 🍌    | `U+1F34C`           | Banana                                 |
  | 🔍    | `U+1F50D`           | Magnifying glass                       |
  | 🏷    | `U+1F3F7`           | Label tag                              | 
  | 🐢    | `U+1F422`           | Turtle (slowness indicator)            | 
