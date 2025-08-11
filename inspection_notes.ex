@@ -26,6 +26,15 @@ i %{"a" => 1}   # Shows type and protocols implemented
 # 6. Check all loaded modules:
 :code.all_loaded()
 
+
+# 7. Another way to get functions/macros
+
+Map.__info__(:functions)
+#=> [delete: 2, drop: 2, equal?: 2, fetch: 2, fetch!: 2, ... ]
+
+Map.__info__(:macros)
+#=> [new_macro_name: 1, ...]  # if the module has macros
+
 # Notes:
 # - `h` works for documentation stored in @doc/@moduledoc.
 # - `i` works for both functions and values.
